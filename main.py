@@ -1,6 +1,7 @@
 import pandas as pd
 from flask import Flask, render_template, jsonify
 
+
 app = Flask(__name__)
 df = pd.read_csv("wines.csv")
 @app.route("/")
@@ -18,6 +19,13 @@ def vine_price(pays,price):
     df2= df[["country","name","price","province","points"]].loc[(df["country"]==pays) & (df["price"] == float(price))]
     result = df2.to_dict(orient="records")
     return jsonify(result)
+
+
+@app.route("/api/wine/taster")
+def get_taster():
+    df2 = df[["taster_name", "taster_twitter_handle"]].drop_duplicates()
+    data = df2.to_dict(orient='records')
+    return jsonify(data)
 
 
 if __name__ == "__main__":
