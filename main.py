@@ -25,7 +25,7 @@ def vine_price(pays,price):
 def get_taster():
     df2 = df[["taster_name", "taster_twitter_handle"]].drop_duplicates()
     data = df2.to_dict(orient='records')
-    return jsonify(data)
+    return data
 
 
 if __name__ == "__main__":
