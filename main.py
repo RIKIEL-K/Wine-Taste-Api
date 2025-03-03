@@ -27,6 +27,12 @@ def get_taster():
     data = df2.to_dict(orient='records')
     return data
 
+@app.route("/api/tasters/<name>/wines")
+def wine_tested(name):
+     df2 = df[["name","price"]].loc[(df["taster_name"] == name)]
+     result = df2.to_dict(orient="records")
+     return jsonify(result)
+
 
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
